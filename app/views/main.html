@@ -1,15 +1,25 @@
-<div class="header">
-  <h3 class="text-muted">anEx</h3>
+<div class="row controls">
+  <h5>Minimum Population: </h5><select ng-model="minPopulation" ng-options="option.toLocaleString() for option in populationOptions"></select>
+  <h5>Results: </h5><span>{{ display.length.toLocaleString() }}</span>
+  <h5>Of Total: </h5><span>{{ data.length.toLocaleString() }}</span>
+  <h5>Or: </h5><span>{{ ((display.length) / (data.length)) * 100 | number:2 }}%</span>
 </div>
-
 <div class="jumbotron">
-  {{ $parent.data }}
-</div>
-
-<div class="row marketing">
-  row
-</div>
-
-<div class="footer">
-  <p>footer</p>
+  <table>
+    <thead>
+      <tr>
+        <th>State/County</th>
+        <th><a href="" ng-click="reverseSort = !reverseSort">2013 Population</a></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="county in display | orderBy:keyOrder:reverseSort">
+        <td>{{ county.CTYNAME }}</td>
+        <td>{{ county.POPESTIMATE2013.toLocaleString() }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <span ng-if="isLoading">
+    Loading...
+  </span>
 </div>

@@ -1,18 +1,18 @@
 'use strict';
 
-describe('Service: Appdata', function () {
+describe('Service: appData', function () {
 
   // load the service's module
   beforeEach(module('anExApp'));
 
   // instantiate service
-  var Appdata;
-  beforeEach(inject(function (_Appdata_) {
-    Appdata = _Appdata_;
+  var appData;
+  beforeEach(inject(function (_appData_) {
+    appData = _appData_;
   }));
 
   it('should do something', function () {
-    expect(!!Appdata).toBe(true);
+    expect(!!appData).toBe(true);
   });
 
 });

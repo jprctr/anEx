@@ -1,23 +1,17 @@
 'use strict';
 
+/**
+ * @ngdoc service
+ * @name anExApp.appData
+ * @description
+ * # appData
+ * Service in the anExApp.
+ */
 angular.module('anExApp')
-	.service('AppData', function AppData() {
-		var AppData = {};
-
-		AppData.fetch = function(){
-			return [
-						{
-							keyA:'someval',
-							keyB:'otherval'
-						},
-						{
-							keyA:'differentval',
-							keyB:'anotherval'
-						}
-					];
-		};
-		// var appData = new Miso.Dataset({
-		// 	url : 'data/airports.json'
-		// });
-		return AppData;
-});
+  .service('Appdata', ['$http', function Appdata($http) {
+  	var url = 'data/CO-EST2013-Limiteddata.json';
+  	var data = $http.get(url).then(function(response){
+  		return response.data;
+  	});
+  	return data;
+  }]);
