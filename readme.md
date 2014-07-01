@@ -1,7 +1,7 @@
 This is an example app for using Angular to work with Data
 
 #####
-Here's the install process:
+Here's the install process if you have nothing on your system:
 
 Install Homebrew
 ruby -e “$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)”
@@ -25,3 +25,6 @@ Install Compass
 gem update —system
 gem install compass
 
+Install/Update Dependencies
+bower install
+bower update
