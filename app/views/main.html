@@ -8,12 +8,14 @@
   <table>
     <thead>
       <tr>
+        <th>State</th>
         <th>State/County</th>
         <th><a href="" ng-click="reverseSort = !reverseSort">2013 Population</a></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="county in display | orderBy:keyOrder:reverseSort">
+        <td>{{ county.STNAME }}</td>
         <td>{{ county.CTYNAME }}</td>
         <td>{{ county.POPESTIMATE2013.toLocaleString() }}</td>
       </tr>
