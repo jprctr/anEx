@@ -10,10 +10,12 @@
 angular.module('anExApp')
 	.directive('chart', function () {
 	return {
-		template: '<div></div>',
-		replace: false,
 		restrict: 'E',
-		link: function postLink(scope, element, attrs) {
+		replace: false,
+		scope: {
+			display: '=display'
+		},
+		link: function (scope, element) {//, attrs) {
 
 			var width = 580,
 				height = 360;
@@ -23,21 +25,32 @@ angular.module('anExApp')
 						.attr('width',width)
 						.attr('height',height);
 
+			var keyFn = function(d) { return d.CTYNAME; };
+
+			// var projection = d3.geo.albersUsa()
+			// 					.scale(width)
+			// 					.translate([width/2,height/2]);
+
+			// var path = d3.geo.path()
+			// 			.projection(projection);
+
 			var drawChart = function(data) {
+
 				var circle = svg.selectAll('circle')
-								.data(data);
+								.data(data,keyFn);
+
+				circle.exit().remove();
 
 				circle.enter().append('circle')
 					.attr('cx',function(){ return Math.random() * width; })
 					.attr('cy',function(){ return Math.random() * height; })
 					.attr('r',function(d){ return Math.sqrt(d.POPESTIMATE2013)/100; });
 
-				circle.exit().remove();
-			}
+			};
 
 			scope.$watch('display',function(newVal,oldVal){
 				if (!_.isEqual(newVal,oldVal)) {
-					drawChart(newVal);
+					drawChart(_.cloneDeep(newVal));
 				}
 			});
 
